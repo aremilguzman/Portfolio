@@ -1,0 +1,203 @@
+@import "../../app.scss";
+
+.about {
+    background: linear-gradient(180deg, #0c0c1d, #111132);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+
+    .textContainer{
+        flex: 1;
+        align-self: flex-end;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+
+        @include mobile {
+            align-self: center;
+            text-align: center;
+            flex-direction: column;
+            padding-top: 15px;
+            padding-left: 55px;
+            
+        }
+
+        p {
+            font-weight: 200;
+            font-size: 16px;
+            color: gray;
+            text-align: right;
+        }
+
+        hr {
+            width: 420px;
+            border: none;
+            border-top: 0.5px solid gray;
+
+            @include mobile {
+                width: 250PX;
+                margin-top: -10px;
+            }
+        }
+    }
+    .titleContainer {
+        flex: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        @include mobile {
+            width: 100%;
+        }
+
+        .title {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+
+            @include mobile {
+                flex-direction: column;
+                text-align: center;
+                gap: 20px;
+            }
+
+            img {
+                width: 260px;
+                height: 85px;
+                border-radius: 50px;
+                object-fit: cover;
+
+                @include mobile {
+                    width: 200px;
+                    height: 50px;
+                    margin-top: 10px;
+                }
+            }
+
+            h1 {
+                font-size: 70px;
+                font-weight: 100;
+
+                @include mobile {
+                    font-size: 30px;
+                    margin-top: -10px;
+                }
+            }
+
+            button {
+                width: 260px;
+                height: 70px;
+                border-radius: 50px;
+                background-color: orange;
+                border: none;
+                font-size: 24px;
+                cursor: pointer;  
+
+                @include mobile {
+                    font-size: 16px;
+                    width: 150px;
+                    height: 50px;
+                    margin-top: -15px;
+                }
+            }
+        }
+
+        
+    }
+
+    .descriptionContainer  {
+        text-align: center;
+        margin-bottom: 50px;
+        padding-bottom: 30px;
+        font-size: 18px;
+
+        @include mobile {
+            padding-top: 20px;
+            font-size: 18px;
+            text-align: center;
+            margin-bottom: -25px;
+        }
+    }
+
+    .listContainer {
+        flex: 2;
+        display: flex;
+        max-width: 1366px;
+        margin: auto;
+
+        @include mobile {
+            flex-direction: column;
+            width: 100%;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 27px;
+            font-weight: bold;
+
+            @include mobile {
+                font-size: 20px;
+                text-align: center;
+                margin-bottom: 8px;
+                
+            }
+        }
+
+        .techList {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+
+            .listItem {
+                flex: 0 0 calc(33.33% - 20px);
+                box-sizing: border-box;
+                padding: 5px;
+                margin: 0 0 10px 10px;
+                position: relative;
+                font-size: 20;
+                font-weight: bold;
+                padding-left: 20px;
+
+                @include mobile {
+                    font-size: 15px;
+                    text-align: center;
+                    flex: 0 0 calc(50% - 20px);
+                }
+
+                &:before {
+                    content: '▹';
+                    position: absolute;
+                    top: 50%;
+                    left: 0;
+                    font-size: 1.5rem;
+                    transform: translateY(-50%);
+                    color: orange;
+
+                    @include mobile {
+                        font-size: 1.3rem;
+                    }
+                  }
+            } 
+        }
+
+        .box {
+            padding: 30px;
+            width: 850px;
+            border: 0.5px solid gray;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            @include mobile {
+                border: none;
+                width: 100%;
+            }
+
+        }
+    }
+
+}
