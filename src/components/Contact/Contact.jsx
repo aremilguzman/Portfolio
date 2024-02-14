@@ -2,6 +2,8 @@ import { useRef, useState } from "react";
 import "./contact.scss"
 import { motion, useInView } from "framer-motion";
 import emailjs from '@emailjs/browser';
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.css';
 
 const variants = {
   initial: {
@@ -24,8 +26,19 @@ export const Contact = () => {
   const formRef = useRef();
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
+  const isMobile = window.innerWidth <= 768;
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
 
   const isInView = useInView(ref, { margin: "-100px" });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -39,9 +52,25 @@ export const Contact = () => {
     )
     .then(
       (result) => {
-        setSuccess(true)
+        Swal.fire({
+          icon: 'success',
+          title: 'Message sent successfully!',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        setSuccess(true);
+        setFormData({
+          name: "",
+          email: "",
+          message: "",
+        });
       },
       (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error sending message. Please call to Hector.',
+        });
         setError(true);
       }
     );
@@ -50,7 +79,7 @@ export const Contact = () => {
 return (
   <motion.div
     ref={ref}
-    className="contact"
+    className={`contact ${isMobile ? "mobile" : ""}`}
     variants={variants}
     initial="initial"
     whileInView="animate"
@@ -60,10 +89,6 @@ return (
       <motion.div className="item" variants={variants}>
         <h2>E-mail</h2>
         <span>aremilguzman@hotmail.com</span>
-      </motion.div>
-      <motion.div className="item" variants={variants}>
-        <h2>City</h2>
-        <span>Santo Domingo</span>
       </motion.div>
       <motion.div className="item" variants={variants}>
         <h2>Phone</h2>
@@ -107,9 +132,9 @@ return (
         whileInView={{ opacity: 1 }}
         transition={{ delay: 4, duration: 1 }}
       >
-        <input type="text" required placeholder="Name" name="name"/>
-        <input type="email" required placeholder="Email" name="email"/>
-        <textarea rows={8} placeholder="Message" name="message"/>
+        <input type="text" required placeholder="Name" name="name" value={formData.name} onChange={handleInputChange}/>
+        <input type="email" required placeholder="Email" name="email" value={formData.email} onChange={handleInputChange}/>
+        <textarea rows={8} placeholder="Message" name="message" value={formData.message} onChange={handleInputChange}/>
         <button>Submit</button>
         {error && "Error"}
         {success && "Success"}
